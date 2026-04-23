@@ -1,0 +1,13 @@
+interface:
+  display_name: "Rising Seller Leads"
+  short_description: "用 proboost 挖掘 Amazon/TK 上升期卖家建联池"
+  default_prompt: "Use $rising-seller-leads to find rising same-category Amazon and TikTok Shop sellers worth contacting."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "proboost-mcp"
+      description: "Amazon and TikTok Shop category, seller, shop, SKU, sales, GMV, review, creator, video, and trend data source"
+      transport: "sse"
+      url: "http://mcp.microdata-inc.com/mcp-servers/proboost-mcp/sse"
+policy:
+  allow_implicit_invocation: true
