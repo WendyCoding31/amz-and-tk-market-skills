@@ -1,6 +1,6 @@
 # Product Market Scout Rubric
 
-Use this reference after collecting proboost-mcp data and before writing the final Chinese answer.
+Use this reference after collecting platform data from `compatible Amazon source` and/or `compatible TikTok Shop source`, then before writing the final Chinese answer.
 
 ## Trend Labels
 
@@ -10,7 +10,7 @@ Use the best available 7/30/90 day signal. Prefer 30-day trend for executive con
 - `稳定盘`: 30-day change is between -10% and +15%, demand is consistent, and top products remain active.
 - `下滑盘`: 30-day sales/GMV/search/BSR signal is down more than 10%, especially if 7-day data is also weak.
 - `早期起量`: TikTok GMV/sales/video signals are rising from a low base, with several recent creators/shops/products gaining traction.
-- `数据不足`: proboost-mcp does not return enough comparable time-series data.
+- `数据不足`: the required platform MCP does not return enough comparable time-series data.
 
 ## Competition Labels
 
@@ -28,32 +28,34 @@ TikTok Shop competition:
 
 ## Margin Health
 
-If factory cost, freight, duties, platform fees, ads/affiliate commission, and returns are available, judge contribution margin. If cost is missing, use price band only as a proxy and mark `需要成本确认`.
+If product cost, freight, duties, platform fees, ads/affiliate commission, and returns are available, judge contribution margin from a seller perspective. If cost is missing, use price band only as a proxy and mark `需要成本确认`.
 
 - `健康`: estimated gross margin >= 35% or contribution margin >= 20%.
 - `一般`: gross margin 20%-35%, or contribution margin 10%-20%.
 - `偏薄`: gross margin < 20%, contribution margin < 10%, or market price is already heavily compressed.
 - `需要成本确认`: selling price looks possible, but landed cost or commission/ads assumptions are missing.
 
-## Factory-Entry Fit
+## Seller-Entry Fit
 
-Prefer `适合工厂直供切入` when these signals appear together:
+Prefer `适合卖家切入` when these signals appear together:
 
 - Clear demand exists on at least one platform.
 - Competition is not purely brand/review-moat dominated.
-- Factory has cost, MOQ, speed, customization, material, packaging, or variant advantage.
+- The seller can compete on price, variant selection, bundle design, listing quality, traffic strategy, or brand positioning.
 - Product can be differentiated by specs, bundle, scenario, creator content, or compliance quality.
-- Compliance/IP/logistics risk is manageable.
+- Compliance/IP/logistics and after-sales risk are manageable.
 
 Use caution labels:
 
 - `适合小单测试`: TikTok signal is rising but Amazon is crowded, or data is early.
+- `适合精铺切入`: demand exists, price band is clear, and seller can compete with efficient listing or traffic operations.
+- `适合品牌化切入`: demand exists but requires better content, brand story, bundle, or review strategy.
 - `只适合差异化切入`: demand exists but direct copy would enter a price war.
-- `不建议直接切`: demand is falling, margin is thin, review/brand moat is too strong, or compliance/IP/logistics risk is high.
+- `不建议进入`: demand is falling, margin is thin, review or brand moat is too strong, or compliance/IP/logistics risk is high.
 
 ## Platform Recommendation
 
-- Recommend `Amazon` when demand is stable, search intent is clear, reviews matter, and the factory can compete on quality/cost/variants.
+- Recommend `Amazon` when demand is stable, search intent is clear, reviews matter, and the seller can compete on pricing, listing quality, reviews, or variants.
 - Recommend `TikTok Shop` when the product is visual, demonstrable, impulse-friendly, problem-solving, giftable, or creator-friendly, especially if GMV/video signals are rising from a low base.
 - Recommend `先TK测款再Amazon` when Amazon is mature/crowded but TikTok shows early traction.
 - Recommend `两边都可` only when Amazon demand is healthy and TikTok content traction is also proven.
@@ -68,7 +70,7 @@ Use this table shape by default:
 | 产品映射 | {Amazon关键词/类目} | {TK表达/类目} | {是否同一类产品} |
 | 需求 | {销量/BSR/收入/趋势} | {GMV/销量/趋势} | {强/中/弱} |
 | 竞争 | {卖家/评论/变体/价格} | {店铺/达人/视频/价格} | {低/中/高} |
-| 利润 | {价格带/毛利判断} | {价格带/佣金判断} | {健康/一般/偏薄/待确认} |
-| 进入建议 | {Amazon打法} | {TK打法} | {最终建议平台} |
+| 利润 | {价格带/卖家利润判断} | {价格带/佣金判断} | {健康/一般/偏薄/待确认} |
+| 进入建议 | {Amazon卖家打法} | {TK卖家打法} | {最终建议平台} |
 
-If data is incomplete, keep the cell explicit: `proboost暂未返回` or `需补成本`.
+If data is incomplete, keep the cell explicit: `数据源未返回` or `需补成本`.

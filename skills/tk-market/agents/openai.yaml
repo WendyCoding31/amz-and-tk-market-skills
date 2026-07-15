@@ -1,0 +1,6 @@
+interface:
+  display_name: "TK Market"
+  short_description: "TikTok Shop 市场与品类研究"
+  default_prompt: "Use $tk-market to evaluate whether this TikTok product or category is worth entering."
+policy:
+  allow_implicit_invocation: true

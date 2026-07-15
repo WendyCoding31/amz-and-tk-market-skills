@@ -1,0 +1,6 @@
+interface:
+  display_name: "TK Video Script"
+  short_description: "TikTok scripts from verified market signals"
+  default_prompt: "Use $tk-video-script to turn a TikTok product and trend evidence into localized video scripts."
+policy:
+  allow_implicit_invocation: true

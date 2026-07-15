@@ -1,0 +1,4 @@
+interface:
+  display_name: "AMZ 简化广告"
+  short_description: "简化生成 Sponsored Products 批量广告上传表"
+  default_prompt: "Use $amz-easy-ad to guide ASIN/SKU/date/ad-type intake and execution settings, then generate a Sponsored Products bulk upload XLSX without built-in numbered strategies."

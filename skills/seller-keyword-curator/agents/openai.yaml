@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seller Keyword Curator"
+  short_description: "Curate Amazon traffic keywords from ASINs."
+  default_prompt: "Use these competitor ASINs to expand traffic keywords from a configured source and produce a retained keyword decision table."

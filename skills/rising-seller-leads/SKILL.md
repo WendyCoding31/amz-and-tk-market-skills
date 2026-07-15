@@ -9,25 +9,28 @@ description: Find same-category, rising Amazon and TikTok Shop sellers/shops/bra
 
 Build a practical B2B outreach pool for factories:
 
-`类目发现 -> 同类目定义 -> proboost-mcp 增长卖家识别 -> 质量过滤 -> 建联线索输出`
+`类目发现 -> 同类目定义 -> configured marketplace capabilities 增长卖家识别 -> configured seller-enrichment source 卖家信息补全 -> 质量过滤 -> 建联线索输出`
 
 Use this skill when the user wants names and prioritization of sellers worth contacting, not just a generic seller list.
 
 ## Hard Rules
 
-- Use `proboost-mcp` for Amazon/TikTok Shop/TK platform data: category, SKU, seller/shop, sales, GMV, price, review, new products, creator/video heat, shop growth, and trend signals.
-- If `proboost-mcp` tools are not visible, discover/search for `proboost-mcp` first. If still unavailable, stop and say the data source is unavailable; do not replace it with invented lead data.
-- Do not invent contact information. Only include email, website, LinkedIn, Instagram, TikTok account, or official store links when returned by proboost-mcp or found from a clearly public business source.
+- Use `configured marketplace capabilities` for Amazon/TikTok Shop/TK platform data: category, SKU, seller/shop, sales, GMV, price, review, new products, creator/video heat, shop growth, and trend signals.
+- Use `configured seller-enrichment source` `amazon.seller_search` for Amazon seller company enrichment when the user asks for seller company information, address, email, phone, business name, store rating, item count, annual sales, or contact fields.
+- If `configured marketplace capabilities` or `configured seller-enrichment source` tools are not visible when needed, discover/search for the relevant MCP first. If still unavailable, stop and say the data source is unavailable; do not replace it with invented lead data.
+- Do not invent contact information. Only include email, phone, address, website, LinkedIn, Instagram, TikTok account, or official store links when returned by `configured seller-enrichment source`, returned by `configured marketplace capabilities`, or found from a clearly public business source.
+- `configured seller-enrichment source` `amazon.seller_search` phone/email fields may be masked as `****`; preserve the masked value and label it `configured seller-enrichment source已脱敏`, not as a real usable email/phone.
 - Exclude or down-rank platform self-operated accounts, dominant mega-brands, pure low-price white-label copycats, and sellers with no visible supplier-fit reason.
 - Answer in Chinese by default. Output should be directly usable by a factory BD or boss.
 
 ## Workflow
 
 1. Normalize the factory's product/category into a `同类目定义`.
-2. Use proboost-mcp to discover candidate Amazon sellers and/or TikTok Shop shops in that category.
-3. Score growth with 30/60/90 day signals and expansion signals.
-4. Filter candidates for supplier fit and contactability.
-5. Output a ranked `建联池` with touch order, fit reason, and missing-data flags.
+2. Use configured marketplace capabilities to discover candidate Amazon sellers and/or TikTok Shop shops in that category.
+3. Use configured seller-enrichment source `amazon.seller_search` to enrich Amazon seller company/contact fields when seller IDs, seller names, SKUs, SPUs, or item titles are available.
+4. Score growth with 30/60/90 day signals and expansion signals.
+5. Filter candidates for supplier fit and contactability.
+6. Output a ranked `建联池` with touch order, fit reason, and missing-data flags.
 
 Load [references/rubric.md](references/rubric.md) before scoring and final output.
 
@@ -45,26 +48,60 @@ Create a short `同类目定义` before querying:
 
 If the user only gives a product image/title/link, infer the category but state the assumption.
 
-## 2. Query proboost-mcp
+## 2. Query MCP Data Sources
 
-Use available proboost-mcp tools according to platform.
+Use available MCP tools according to platform and data need.
+
+Explicit MCP tools used by this skill:
+
+- `configured marketplace capabilities`: `amazon.product_search`, `amazon.product_detail`, `amazon.sales_history`, `amazon.review_search`, `amazon.market_overview`, `amazon.market_overview`, `amazon.market_overview`, `tiktok.market_overview`, `tiktok.market_overview`, `tiktok.product_search`, `tiktok.product_detail`, `tiktok.sales_history`, `tiktok.shop_search`, `tiktok.shop_detail`, `tiktok.market_overview`, `tiktok.shop_sales_history`, `tiktok.video_search`, `tiktok.live_search`.
+- `configured seller-enrichment source`: `amazon.seller_search`.
 
 Amazon discovery pattern:
 
 - Use category/keyword mapping to find relevant category node.
-- Use `amz_product_selection` for SKU candidates in the target category and price band.
-- Use `amz_sku_query` to extract title, seller name/id, brand, category, price, reviews, rating, link, and fulfillment.
-- Use `amz_sales_query` for recent 30-day sales and prior-period comparison.
-- Use `amz_review_query` when review recency or review quality matters.
-- Use `amz_market_price`, `amz_market_rating`, and `amz_market_ratings` for market context.
+- Use `amazon.product_search` for SKU candidates in the target category and price band.
+- Use `amazon.product_detail` to extract title, seller name/id, brand, category, price, reviews, rating, link, and fulfillment.
+- Use `amazon.sales_history` for recent 30-day sales and prior-period comparison.
+- Use `amazon.review_search` when review recency or review quality matters.
+- Use `amazon.market_overview`, `amazon.market_overview`, and `amazon.market_overview` for market context.
+- Use `configured seller-enrichment source` `amazon.seller_search` after candidate seller discovery to enrich Amazon seller/company fields.
+
+`configured seller-enrichment source` `amazon.seller_search` lookup inputs:
+
+- `sellerId`: Amazon seller ID, exact match.
+- `sellerName`: seller name, fuzzy match.
+- `busName`: company/business name, fuzzy match.
+- `skuId`: child ASIN/SKU ID, supports comma-separated batch lookup.
+- `spuId`: parent ASIN/SPU ID, supports comma-separated batch lookup.
+- `itemTitle`: item title keyword, fuzzy match through SKU-to-seller association.
+- marketplace: normalized Amazon marketplace code; map it to the provider schema at runtime.
+- `page`, `size`: pagination; size max 50.
+- `sortFields`: multi-field sorting by `stars`, `ratings`, `item_cnt`, `sold_cnt_lst_yr`, `sold_amt_cur_yr`, or `seller_id`.
+
+`configured seller-enrichment source` `amazon.seller_search` seller fields to preserve when returned:
+
+- `seller_id`: seller ID.
+- `seller_name`: seller/store name.
+- `bus_name`: company/business name.
+- `address`: seller/company address.
+- `phone`: phone; may be masked as `****`.
+- `email`: email; may be masked as `****`.
+- `stars`: store rating.
+- `ratings`: store rating count.
+- `item_cnt`: active/listed item count.
+- `sold_cnt_lst_yr`: last-year sales units.
+- `sold_amt_cur_yr`: current-year sales amount.
+
+If any of these fields are missing, output `configured seller-enrichment source暂未返回`. If `phone` or `email` is masked, output the masked value and mark `configured seller-enrichment source已脱敏`.
 
 TikTok Shop discovery pattern:
 
-- Use `tt_commodity_cat_list` or `tt_commodity_get_commodity_cat_tree` to map category.
-- Use `tt_commodity_info_list` to find product candidates by keyword/category/price/sales.
-- Use `tt_commodity_detail` and `tt_commodity_sales_trend` for product-level growth.
-- Use `tt_shop_info_list`, `tt_shop_detail`, `tt_shop_market_info`, and `tt_shop_sales_trend` for shop-level growth and SKU expansion.
-- Use `tt_video_info_list`, `tt_live_info_list`, and expert tools when creator/video/live growth is part of the signal.
+- Use `tiktok.market_overview` or `tiktok.market_overview` to map category.
+- Use `tiktok.product_search` to find product candidates by keyword/category/price/sales.
+- Use `tiktok.product_detail` and `tiktok.sales_history` for product-level growth.
+- Use `tiktok.shop_search`, `tiktok.shop_detail`, `tiktok.market_overview`, and `tiktok.shop_sales_history` for shop-level growth and SKU expansion.
+- Use `tiktok.video_search`, `tiktok.live_search`, and expert tools when creator/video/live growth is part of the signal.
 
 When the user asks for both Amazon and TK, query both. When they ask for one platform, stay focused on that platform.
 
@@ -109,7 +146,8 @@ Default final answer:
 3. `建联池`: ranked table with 5-20 candidates depending on data volume.
 4. `优先触达顺序`: A/B/C priority and why.
 5. `建联话术切入点`: 1-3 short angles based on the seller's growth signal and supplier gap.
-6. `数据缺口`: missing proboost metrics or contact fields.
+6. `configured seller-enrichment source 卖家信息`: seller company/contact enrichment fields when Amazon sellers are included.
+7. `数据缺口`: missing marketplace/seller-enrichment metrics or contact fields.
 
 Keep the table actionable. Avoid long market-report prose unless the user asks for analysis.
 
@@ -118,4 +156,9 @@ Required table columns:
 | 优先级 | 卖家/店铺 | 平台 | 主打产品 | 增长信号 | 联系方式来源 | 适配理由 | 下一步 |
 |---|---|---|---|---|---|---|---|
 
-If a field is missing, write `proboost暂未返回` or `公开渠道待补`, not a guess.
+When Amazon seller company information is requested, include a seller enrichment table with these `configured seller-enrichment source` fields:
+
+| 卖家 | seller_id | seller_name | bus_name | address | phone | email | stars | ratings | item_cnt | sold_cnt_lst_yr | sold_amt_cur_yr |
+|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|
+
+If a field is missing, write `数据源未返回`, `configured seller-enrichment source暂未返回`, or `公开渠道待补`, not a guess.

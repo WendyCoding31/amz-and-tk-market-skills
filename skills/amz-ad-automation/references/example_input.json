@@ -1,0 +1,37 @@
+{
+  "sku": "SELLER-SKU-123",
+  "start_date": "20260527",
+  "campaigns": [
+    {
+      "strategy": "S22",
+      "ad_type": "sp_keyword",
+      "daily_budget": 5,
+      "bidding_strategy": "fixed",
+      "grouping": "rank",
+      "match_types": ["broad"],
+      "ad_group_default_bid": 0.2,
+      "keywords": [
+        {"text": "gift card", "aba_rank": 8000, "bid": 0.35},
+        {"text": "birthday card", "aba_rank": 42000, "bid": 0.3},
+        {"text": "popup flower card", "aba_rank": 125000, "bid": 0.2},
+        {"text": "mom card", "aba_rank": 180000, "bid": 0.1}
+      ]
+    },
+    {
+      "strategy": "S20",
+      "ad_type": "asin",
+      "daily_budget": 5,
+      "asins": [
+        {"asin": "B0ABCDEF12", "bid": 0.05},
+        {"asin": "B0XYZXYZ99", "bid": 0.05}
+      ]
+    },
+    {
+      "strategy": "S1",
+      "ad_type": "auto",
+      "daily_budget": 5,
+      "top_of_search_percentage": 900,
+      "auto_targets": {"close-match": 0.05, "loose-match": 0.05}
+    }
+  ]
+}
