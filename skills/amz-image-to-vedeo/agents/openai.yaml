@@ -1,0 +1,4 @@
+interface:
+  display_name: "AMZ Image to Vedeo"
+  short_description: "Create Amazon-style product videos."
+  default_prompt: "Generate an Amazon-style product video from one product image. Save all process files under ~/Desktop/amz-image-to-vedeo-output by default. Require an explicit audio choice: silent or generate_audio. Analyze the image, produce 3 scripts, save scripts.json and script_cards.md, show detailed script cards in chat for easy comparison, stop for my script choice, then save render_plan.json, show the final render summary with estimated credits and CNY cost, wait for my explicit confirmation, then render the selected video and save run_manifest.json."

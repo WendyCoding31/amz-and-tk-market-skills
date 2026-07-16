@@ -1,0 +1,7 @@
+interface:
+  display_name: "AMZ Keyword Select 0610"
+  short_description: "从亚马逊种子词全量筛到精准可开品关键词并输出表格"
+  default_prompt: "Use $amz-keyword-select0610 to screen an Amazon US seed keyword into precise product-development keywords."
+
+policy:
+  allow_implicit_invocation: true

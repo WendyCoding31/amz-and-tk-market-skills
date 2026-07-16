@@ -1,0 +1,4 @@
+interface:
+  display_name: "AMZ 高客单半标/非标选品"
+  short_description: "从 Amazon 关键词和 ASIN 中筛选半标品/非标品机会"
+  default_prompt: "Use $amz-premium-select to screen Amazon US keywords and ASINs for semi-standard/non-standard product opportunities, excluding pure standard products and producing SKU development advice."

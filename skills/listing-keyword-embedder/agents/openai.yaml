@@ -1,0 +1,4 @@
+interface:
+  display_name: "Listing Keyword Embedder"
+  short_description: "Embed curated keywords into listing copy."
+  default_prompt: "Embed the curated keywords into an Amazon listing workbook for this marketplace, preserving source ASIN facts and keyword slots."

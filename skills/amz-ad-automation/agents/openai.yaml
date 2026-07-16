@@ -1,0 +1,4 @@
+interface:
+  display_name: "AMZ 广告自动化"
+  short_description: "生成 Sponsored Products 批量广告上传表"
+  default_prompt: "Use $amz-ad-automation to guide ASIN/SKU/date/ad-type intake, recommend and confirm S1-S27 strategies, then generate a Sponsored Products bulk upload XLSX."

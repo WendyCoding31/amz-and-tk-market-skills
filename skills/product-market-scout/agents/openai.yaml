@@ -1,0 +1,6 @@
+interface:
+  display_name: "Product Market Scout"
+  short_description: "用可配置数据源判断 Amazon/TK 卖家选品机会"
+  default_prompt: "Use $product-market-scout to evaluate whether this product is worth selling on Amazon and TikTok Shop."
+policy:
+  allow_implicit_invocation: true

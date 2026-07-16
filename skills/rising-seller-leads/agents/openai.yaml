@@ -1,0 +1,6 @@
+interface:
+  display_name: "Rising Seller Leads"
+  short_description: "挖掘 Amazon/TK 上升期卖家建联池"
+  default_prompt: "Use $rising-seller-leads to find rising same-category Amazon and TikTok Shop sellers worth contacting."
+policy:
+  allow_implicit_invocation: true

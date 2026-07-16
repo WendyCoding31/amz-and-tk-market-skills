@@ -1,0 +1,6 @@
+interface:
+  display_name: "TK Influencer Analysis"
+  short_description: "Analyze TikTok products and influencers"
+  default_prompt: "Use $tk-influencer-analysis to evaluate a TikTok product and the influencers selling it."
+policy:
+  allow_implicit_invocation: true

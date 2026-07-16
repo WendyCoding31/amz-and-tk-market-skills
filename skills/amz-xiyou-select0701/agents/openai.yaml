@@ -1,0 +1,7 @@
+interface:
+  display_name: "AMZ Xiyou Select 0701"
+  short_description: "西柚关键词到ASIN复筛开品工作流"
+  default_prompt: "Use $amz-xiyou-select0701 to turn a Xiyou keyword workbook into an Amazon openability and ASIN rescreen workbook."
+
+policy:
+  allow_implicit_invocation: true

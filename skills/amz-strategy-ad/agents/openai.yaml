@@ -1,0 +1,4 @@
+interface:
+  display_name: "AMZ 策略广告"
+  short_description: "先选广告策略，再生成 Sponsored Products 批量上传表"
+  default_prompt: "Use $amz-strategy-ad to ask product stage and ad objective, recommend confirmed S1-S27 Sponsored Products strategies, then collect execution settings and generate an upload-ready XLSX."
