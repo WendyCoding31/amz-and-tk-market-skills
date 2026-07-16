@@ -2,6 +2,6 @@ interface:
   display_name: "Daily TK Report"
   short_description: "生成可自定义品牌的 TikTok 跨境日报 PNG"
   brand_color: "#1457FF"
-  default_prompt: "Use $daily-tk-proboost to generate today’s TikTok cross-border ecommerce daily report poster."
+  default_prompt: "Use $daily-tk-market-brief to generate today’s TikTok cross-border ecommerce daily report poster."
 policy:
   allow_implicit_invocation: true

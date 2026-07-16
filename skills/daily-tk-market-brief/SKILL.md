@@ -1,6 +1,6 @@
 ---
-name: daily-tk-proboost
-description: Generate a branded TikTok Shop cross-border ecommerce daily report poster from current web news and any compatible configured TikTok Shop data source. The skill id is retained for backward compatibility; runtime data and visual branding are provider-agnostic.
+name: daily-tk-market-brief
+description: Generate a branded TikTok Shop cross-border ecommerce daily report poster from current web news and any compatible configured TikTok Shop data source. Runtime data and visual branding are provider-agnostic.
 ---
 
 # Daily TK Report

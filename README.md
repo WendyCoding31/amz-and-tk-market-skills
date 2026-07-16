@@ -2,7 +2,7 @@
 
 这是一组面向跨境电商真实工作流的 Agent Skills，覆盖 Amazon 与 TikTok Shop 的选品、市场判断、竞品研究、Listing、广告、达人分析、视频脚本和商品视频生成。
 
-仓库保留了原来的 `proboost-market-skills` 名称，但所有市场数据 Skill 均按**数据源可替换**原则整理：业务判断不绑定某个 MCP 服务商，运行前由 Agent 检查当前可用的数据源，并把返回字段映射为统一能力字段。
+所有市场数据 Skill 均按**数据源可替换**原则整理：业务判断不绑定某个 MCP 服务商，运行前由 Agent 检查当前可用的数据源，并把返回字段映射为统一能力字段。
 
 ## 使用原则
 
@@ -59,7 +59,7 @@
 | `tk-market` | 判断 TikTok Shop 产品、关键词或类目是否值得进入 |
 | `tk-influencer-analysis` | 判断产品适合哪些达人，或达人是否匹配某个产品 |
 | `tk-video-script` | 用商品、达人、视频和评论证据生成本地化短视频脚本 |
-| `daily-tk-proboost` | 生成 TikTok 跨境日报海报；名称为历史兼容，数据源已解耦 |
+| `daily-tk-market-brief` | 生成 TikTok 跨境日报海报，数据源已解耦 |
 
 ### 电商视频
 

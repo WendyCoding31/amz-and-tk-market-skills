@@ -132,7 +132,7 @@ def load_optional_image(value: str | None) -> Image.Image | None:
         return None
     try:
         if value.startswith(("http://", "https://")):
-            req = urllib.request.Request(value, headers={"User-Agent": "daily-tk-proboost/1.0"})
+            req = urllib.request.Request(value, headers={"User-Agent": "daily-tk-market-brief/1.0"})
             with urllib.request.urlopen(req, timeout=20) as resp:
                 data = resp.read()
             return Image.open(io.BytesIO(data)).convert("RGBA")
@@ -495,8 +495,8 @@ def resolve_output(value: str | None) -> Path:
     if value:
         return Path(value).expanduser().resolve()
     now = dt.datetime.now()
-    out_dir = Path.cwd() / "daily-tk-proboost" / now.strftime("%Y-%m-%d")
-    return (out_dir / f"daily-tk-proboost-{now.strftime('%Y%m%d-%H%M%S')}.png").resolve()
+    out_dir = Path.cwd() / "daily-tk-market-brief" / now.strftime("%Y-%m-%d")
+    return (out_dir / f"daily-tk-market-brief-{now.strftime('%Y%m%d-%H%M%S')}.png").resolve()
 
 
 def parse_args() -> argparse.Namespace:
